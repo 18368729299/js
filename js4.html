@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+<body>
+<style type="text/css">
+  #list{
+    height: 100px;
+    width: 500px;
+
+  }
+  .element{
+    height: 30px;
+    width: 30px;
+    background-color: #ff0000;
+    float:left;
+    text-align: center;
+    line-height:30px;  
+    margin-left: 10px
+  }
+</style>
+<input id='input' type='text'/>
+<button id='left-in'>左侧入</button>
+<button id='right-in'>右侧入</button>
+<button id='left-out'>左侧出</button>
+<button id='right-out'>右侧出</button>
+
+<div id="list" >
+
+</div>
+<script type="text/javascript">
+  var leftin = document.getElementById('left-in');
+  var rightin = document.getElementById('right-in');
+  var leftout = document.getElementById('left-out');
+  var rightout = document.getElementById('right-out');
+
+  var input = document.getElementById('input');
+
+  var list = document.getElementById('list');
+  list.onclick = function(e){
+    if(e.target.getAttribute('class')=='element'){
+        e.target.remove();
+    }
+  }
+
+  leftin.onclick=function(){
+
+       if(input.value!=''&&input.value!=null){
+           var div= document.createElement("div");
+           div.innerHTML=input.value;
+           div.setAttribute("class", "element");
+           document.getElementById("list").appendChild(div);
+           input.value='';
+       }else{
+            alert('请输入数字');
+       }
+       
+  }
+  rightin.onclick=function(){
+    if(input.value!=''&&input.value!=null){
+       var div= document.createElement("div");
+       div.innerHTML=input.value;
+       div.setAttribute("class", "element");
+       document.getElementById("list").insertBefore(div,document.getElementById("list").childNodes[0]);
+       input.value='';
+    }else{
+        alert('请输入数字');
+    }
+  }
+  leftout.onclick=function(){
+      var parent=document.getElementById("list");
+      if(parent.childNodes.length>1){
+        var node = parent.childNodes[1];
+        parent.removeChild(node);
+        alert(node.innerHTML);
+      }else{
+        alert('队列中没有元素');
+      }
+  }
+  rightout.onclick=function(){
+      var parent=document.getElementById("list");
+      if(parent.childNodes.length>1){
+        var node = parent.childNodes[parent.childNodes.length-1]
+        parent.removeChild(node);
+        alert(node.innerHTML);
+      }else{
+        alert('队列中没有元素');
+      }
+  }
+
+</script>
+</body>
+</html>
